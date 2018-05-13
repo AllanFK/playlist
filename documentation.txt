@@ -1,0 +1,18 @@
+Playlist App 
+
+A user can add a song to the playlist by adding a title and a full Youtube url. If an input
+field is empty or if the song already has been added to the list an error message will be shown.
+
+The app uses LocalStorage to store the users playlist so that navigating between the pages or reloading
+the browser will not empty the playlist.
+
+The playlist is an array of song objects that are converted to html before rendered. To remove
+a song the array is merely rerendered with the selected song filtered out.  
+
+The app uses Class syntax to organise the code which is ES6 just syntax sugar for the js prototype object 
+system. If the App where to grow larger a framework like React or Angular should be added for better 
+scalability, performange and maintenance.
+
+ES6 syntax that is only supported by the newest browsers. I order to work in older browsers the 
+code must be compiled with Babel with a bundling tool like Webpack.
+

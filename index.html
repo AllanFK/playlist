@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+    <head>
+        <title>Playlist</title>
+        <link rel="stylesheet" href="./css/style.css" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1>Playlist</h1>
+                <nav>
+                    <a href="./index.html" class="active">Playlist</a> 
+                    <a href="./about.html">About</a>
+                </nav>
+                <div class="video-wrapper">
+                    <iframe id="iframe" allowfullscreen></iframe>
+                </div>
+            </header> 
+            <main>
+                <input type="text" id="title" placeholder="Title" />
+                <input type="text" id="url" placeholder="Youtube url" />
+                <button id="addSong">Add song</button>
+                <div id="errorMsg" class="error-message"></div>
+                <div id="playlist" class="playlist"></div>
+            </main>
+            <div id="content" style="color:white">hej</div>
+        </div>
+
+        <!-- <script src="./js/playlistFactory.js" ></script> -->
+        <!-- <script src="./js/playlistDelegation.js" ></script> -->
+        <!-- <script src="./js/movie.js" ></script> -->
+        <!-- <script src="./js/validation.js" ></script> -->
+        <script src="./js/eventbus.js" ></script>
+        <script src="./js/test2.js" ></script>
+        <script src="./js/test1.js" ></script>
+        
+
+        <script>
+            document.onreadystatechange = function () {
+                if (document.readyState == "complete") {
+                    // const list = playlist(movie, validation)
+                    // list.init()
+
+                    const pers = Person(eventbus)
+                    pers.init()
+
+                    const c = Content(eventbus)
+                    c.init()
+                    
+                    eventbus.emit("load", pers.getName)
+                    // playlist.init()
+                    // playlist.render()
+
+                    // movie.setup()
+                    // movie.run()
+                    // movie.onClick()
+                    
+                    // const Foo = {
+                    //     init(who) {
+                    //         this.me = who;
+                    //     },
+                    //     identify() {
+                    //         return "hej " + this.me
+                    //     }
+                    // };
+
+                    // var Bar = Object.create( Foo )
+                    // Bar.speak = function(){
+                    //     console.log(this.identify())
+                    // }
+
+                    // Bar.init( "b1" );
+                    // Bar.speak()
+                    // test2.hejsa() 
+
+                    // var Foo = {
+                    //     init: function(who) {
+                    //         this.me = who;
+                    //     },
+                    //     identify: function() {
+                    //         return "I am " + this.me;
+                    //     }
+                    // };
+
+                    // var Bar = Object.create( Foo );
+                    // Bar.speak = function() {
+                    //     console.log( "Hello, " + this.identify() + "." );
+                    // };
+
+                    // var b1 = Object.create( Bar );
+                    // b1.init( "b1" );
+                    // b1.speak()
+                    // var b2 = Object.create( Bar );
+                    // b2.init( "b2" );
+
+                    // b1.speak();
+                    // b2.speak();
+                }
+            }
+        </script>
+    </body>
+</html>
