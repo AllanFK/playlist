@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Decorators</title>
+    </head>
+    <body>
+
+        <script>
+            var AddCheese = (burger) => {
+                burger.setInfo = {
+                    price: burger.getInfo.price + 2,
+                    hasCheese: true,
+                    description: burger.getInfo.description + " with cheese"
+                }
+                return burger
+            }
+
+            var AddPickles = (burger) => {
+                burger.setInfo = {
+                    price: burger.getInfo.price + 4,
+                    hasCheese: burger.getInfo.hasCheese,
+                    description: burger.getInfo.description + " and pickles"
+                }
+            }
+
+
+            var Burger = (info) => {
+                return {
+                    info: info || {
+                            price: 8,
+                            hasCheese: false,
+                            description: "burger"
+                        }
+                    ,
+                    render(){
+                        console.log(this.info.description, this.info.price, this.info.hasCheese)
+                    },
+                    get getInfo(){
+                        return this.info
+                    },
+                    set setInfo(info){
+                        this.info = info
+                        this.render()
+                    }
+                }
+            }
+
+            var burger = Burger()
+             burger.render()
+
+            burger.setInfo = {
+                price: 10,
+                hasCheese: false,
+                description: "good burger"
+            }
+
+            var cheeseBurger = Burger()
+             AddCheese(cheeseBurger)
+            AddPickles(cheeseBurger)
+            AddPickles(cheeseBurger)
+            
+            
+        </script>
+
+    </body>
+</html>

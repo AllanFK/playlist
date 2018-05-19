@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Async await</title>
+        <script src="https://cdn.jsdelivr.net/npm/async-await-es7@1.0.2/index.min.js" ></script>
+    </head>
+    <body>
+        <script>
+
+        var wait = (name = "Per") => {
+            return new Promise((resolve, reject) => {
+                setTimeout(function(){
+                    resolve("hejsa " + name)
+                }, 3000)
+            })
+        }
+
+        async function test(){
+            try{
+                var result = wait()
+                var result2 = wait("Allan")
+                console.log(await result)
+                console.log(await result2)
+                
+            } catch(e){
+                console.error(e)
+            }
+        }    
+            
+        test()
+
+        </script>
+    </body>
+</html>

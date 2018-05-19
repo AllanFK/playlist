@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Generators</title>
+    </head>
+    <body>
+        <script>
+        "use strict";
+        
+        var add = (a, b) => {
+            return a + b
+        }
+
+        var wait = (a = 4) => {
+            return setTimeout(function(){
+                return gen.next(a + 2)
+            }, 1000)
+        }
+
+        var generator = function *(x){
+            var a = yield wait()
+            var b = yield wait(a)
+            console.log(b)
+        }    
+            
+        // for(var num of generator()){
+        //     num
+        // }
+            
+        var gen = generator()
+
+        gen.next()
+        gen.next()
+        
+           
+            
+            
+        </script>
+    </body>
+</html>

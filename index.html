@@ -27,28 +27,28 @@
             <div id="content" style="color:white">hej</div>
         </div>
 
-        <!-- <script src="./js/playlistFactory.js" ></script> -->
+        <script src="./js/playlistFactory.js" ></script>
         <!-- <script src="./js/playlistDelegation.js" ></script> -->
-        <!-- <script src="./js/movie.js" ></script> -->
-        <!-- <script src="./js/validation.js" ></script> -->
+        <script src="./js/movie.js" ></script>
+        <script src="./js/validation.js" ></script>
         <script src="./js/eventbus.js" ></script>
-        <script src="./js/test2.js" ></script>
-        <script src="./js/test1.js" ></script>
+        <!-- <script src="./js/test2.js" ></script>
+        <script src="./js/test1.js" ></script> -->
         
 
         <script>
             document.onreadystatechange = function () {
                 if (document.readyState == "complete") {
-                    // const list = playlist(movie, validation)
-                    // list.init()
+                    const list = playlist(movie, validation)
+                    list.init()
 
-                    const pers = Person(eventbus)
-                    pers.init()
+                    // const pers = Person(eventbus)
+                    // pers.init()
 
-                    const c = Content(eventbus)
-                    c.init()
+                    // const c = Content(eventbus)
+                    // c.init()
                     
-                    eventbus.emit("load", pers.getName)
+                    // eventbus.emit("load", pers.getName)
                     // playlist.init()
                     // playlist.render()
 
