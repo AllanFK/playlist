@@ -9,26 +9,30 @@
         <script>
             
             var ICar = (Car) => {
-                if(!Car.hasOwnProperty("speed")){
-                    throw "Car must had a speed property"
+                if(!Car.speed || !Car.brand){
+                    throw "Car is missing a property"
                 }
 
-                if(!Car.hasOwnProperty("brand")){
-                    throw "Car must had a brand property"
+                if(Object.keys(Car).length > 3){
+                    throw "Car has to many properties"
                 }
                 
                 return Car
             }
-
-            var Car = {
-                speed: "100",
-                brand: "toyota",
-                getInfo(){
-                    console.log("A " + this.brand + " can run is " + this.speed)
+            
+            var Car = () => { 
+                var car = {
+                    speed: "100",
+                    brand: "toyota",
+                    getInfo(){
+                        console.log("A " + this.brand + " can run " + this.speed)
+                    }
                 }
+
+                return ICar(car)
             }
 
-            var CarWithInterface = ICar(Car)
+            var CarWithInterface = Car()
             CarWithInterface.speed = 200
             CarWithInterface.brand = "Opel"
             CarWithInterface.getInfo()
