@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>
+            Interfaces
+        </title>
+    </head>
+    <body>
+
+        <script>
+            
+            var ICar = (Car) => {
+                if(!Car.hasOwnProperty("speed")){
+                    throw "Car must had a speed property"
+                }
+
+                if(!Car.hasOwnProperty("brand")){
+                    throw "Car must had a brand property"
+                }
+                
+                return Car
+            }
+
+            var Car = {
+                speed: "100",
+                brand: "toyota",
+                getInfo(){
+                    console.log("A " + this.brand + " can run is " + this.speed)
+                }
+            }
+
+            var CarWithInterface = ICar(Car)
+            CarWithInterface.speed = 200
+            CarWithInterface.brand = "Opel"
+            CarWithInterface.getInfo()
+
+
+            
+
+            
+        </script>
+    </body>
+</html>
