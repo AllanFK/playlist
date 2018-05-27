@@ -22,6 +22,41 @@
                 }
             }
 
+            function doSomething(name) {
+                console.log('Hello, ' + name);
+            }
+
+            function loggingDecorator(wrapped) {
+                return function() {
+                    console.log('Starting', arguments);
+                    const result = wrapped.apply(this, arguments);
+                    console.log('Finished', result);
+                    return result;
+                }
+            }
+
+            var timingDecorator = (wrapped) => {
+                return function() {
+                    console.time()
+                    var result = wrapped.apply(this, arguments)
+                    console.timeEnd()
+                    return result
+                }
+            }
+
+            var tryCatch = (wrapped) => {
+                console.log("wrapped")
+                return function(){
+                    try{ 
+                        console.log(wrapped)
+                        wrapped.apply(this, arguments)
+                    } catch(ex){
+                        console.error("error",ex)
+                    }
+                }
+            }
+ 
+
 
             var Burger = (info) => {
                 return {
@@ -43,22 +78,30 @@
                     }
                 }
             }
+// <!-- 
+//             var burger = tryCatch(Burger)
+//             burger().setInfo = {
+//                 price: 10,
+//                 hasCheese: false,
+//                 description: "good burger"
+//             } -->
 
-            var burger = Burger()
-             burger.render()
+            loggingDecorator(doSomething)("Allan")
+// <!-- 
+//             burger.setInfo = {
+//                 price: 10,
+//                 hasCheese: false,
+//                 description: "good burger"
+//             }
 
-            burger.setInfo = {
-                price: 10,
-                hasCheese: false,
-                description: "good burger"
-            }
+//             var cheeseBurger = Burger()
+//              AddCheese(cheeseBurger)
+//             AddPickles(cheeseBurger)
 
-            var cheeseBurger = Burger()
-             AddCheese(cheeseBurger)
-            AddPickles(cheeseBurger)
-            AddPickles(cheeseBurger)
+//               -->
+            // timingDecorator(doSomething)("Allan")
             
-            
+
         </script>
 
     </body>

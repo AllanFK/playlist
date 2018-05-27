@@ -2,6 +2,7 @@
     <head>
         <title>Playlist</title>
         <link rel="stylesheet" href="./css/style.css" />
+        <script src="./dist/bundle.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -21,6 +22,7 @@
                 <input type="text" id="title" placeholder="Title" />
                 <input type="text" id="url" placeholder="Youtube url" />
                 <button id="addSong">Add song</button>
+                <button id="test">Test</button>
                 <div id="errorMsg" class="error-message"></div>
                 <div id="playlist" class="playlist"></div>
             </main>
@@ -32,6 +34,7 @@
         <script src="./js/movie.js" ></script>
         <script src="./js/validation.js" ></script>
         <script src="./js/eventbus.js" ></script>
+        <script src="./js/testThis.js" ></script>
         <!-- <script src="./js/test2.js" ></script>
         <script src="./js/test1.js" ></script> -->
         
@@ -39,8 +42,16 @@
         <script>
             document.onreadystatechange = function () {
                 if (document.readyState == "complete") {
-                    const list = playlist(movie, validation)
+                    const id = "tgbNymZ7vqY"
+                    
+                    const list = playlist(id, eventbus)
                     list.init()
+
+                    const mov = movie(id, eventbus)
+                    mov.init()
+
+                    const vali = validation(eventbus)
+                    vali.init()
 
                     // const pers = Person(eventbus)
                     // pers.init()

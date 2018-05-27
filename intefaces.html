@@ -12,22 +12,26 @@
                 if(!car){
                     car = Car()
                 }
+                
+                var properties = ["speed", "brand", "getInfo"]
 
-                if(!car.speed || !car.brand){
-                    throw "Car is missing a property"
-                }
+                properties.forEach(prop => {
+                    if(!car[prop]){
+                        throw "Car is missing a property: " + prop
+                    }
+                })
 
-                if(Object.keys(car).length > 3){
+                if(Object.keys(car).length > properties.length){
                     throw "Car has to many properties"
                 }
                 
                 return car
             }
             
-            var Car = () => { 
+            var Car = (speed, brand) => { 
                 var car = {
-                    speed: "100",
-                    brand: "toyota",
+                    speed: speed || "100",
+                    brand: brand || "toyota",
                     getInfo(){
                         console.log("A " + this.brand + " can run " + this.speed)
                     }
@@ -36,24 +40,22 @@
                 return ICar(car)
             }
 
-            var Bike = () => {
-                var bike = {
-                    speed: "20",
-                    getInfo(){
-                        console.log("A " + this.brand + " can run " + this.speed)
-                    }
-                }
+            // var Bike = () => {
+            //     var bike = {
+            //         speed: "20",
+            //         getInfo(){
+            //             console.log("A " + this.brand + " can run " + this.speed)
+            //         }
+            //     }
 
-                return ICar(bike)
-            }
+            //     return ICar(bike)
+            // }
 
-            var CarWithInterface = ICar()
-            CarWithInterface.speed = 200
-            CarWithInterface.brand = "Opel"
-            CarWithInterface.getInfo()
+            var opel = Car("200", "Opel")
+            opel.getInfo()
 
-            var newBike = Bike()
-            newBike.getInfo()
+            // var newBike = Bike()
+            // newBike.getInfo()
             
 
             

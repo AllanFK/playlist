@@ -1,4 +1,4 @@
-const playlist = (movie, validation) => {
+const playlist = (id, eventbus) => {
 
     var main = document.querySelector("main"),
         urlInput = main.querySelector("#url"),
@@ -6,38 +6,41 @@ const playlist = (movie, validation) => {
         songBtn = main.querySelector("#addSong"),
         playlistDiv = main.querySelector("#playlist"),
 
-        playList = [{
-            id: "tgbNymZ7vqY",
+        playlist = [{
+            id: id,
             title: "Muppets"
         }],
         
-        selectedVideo = playList[0].id
-
+        selectedVideo = playlist[0].id
 
     return {
         init(){
             this.render()
             this.bindEvents()
         },
+
         render(){
             playlistDiv.innerHTML = this.getHtmlFromList
-            movie(selectedVideo).render()
             this.resetFields()
         },
+
         bindEvents(){
             main.onclick = (e) => {
                 if(e.target.className === "playlist-song-delete"){
                     this.deleteSong(e.target.id)
                 } else if(e.target.id === "addSong") {
-                    this.addSong()
+                    this.validateSong()
                 } else if(e.target.className === "playlist-song-title"){
                     this.setSelectedVideo = e.target.id
                 }
             }   
+
+            eventbus.on("validated", params => this.addSong(params))
         },
+
         get getHtmlFromList(){
             var html = ""
-            playList.forEach(song => {
+            playlist.forEach(song => {
                 const id = song.id
                 const extraClass = id === selectedVideo ? "selected" : ""
                 html += `<div class="playlist-song ${extraClass}">
@@ -47,40 +50,43 @@ const playlist = (movie, validation) => {
             })
             return html
         },
+
         set setSelectedVideo(id){
+            eventbus.emit("update", id)
             selectedVideo = id
             this.render()
         },
+
         set setPlaylist(newPlaylist){
-            playList = newPlaylist
+            playlist = newPlaylist
             this.render()
         },
-        addSong(){
+
+        validateSong(){
             const url = urlInput.value
             const id = url.substr(url.indexOf("=") + 1)
             const title = titleInput.value
     
-            var validate = validation()
-            if(!validate.isValidInput(playList, id, url, title)){
-                return validate.render()
-            }
+            eventbus.emit("validate", { playlist, id, url, title })
+        },
+
+        addSong(params){
+            const { isValid, id, title }  = params
+            if(!isValid) return
             
-            const song = {
-                id: id,
-                title: title
-            }
-    
-            playList.push(song)
+            playlist.push({ id, title })
             this.setSelectedVideo = id
         },
+
         deleteSong(id){
             if(!confirm("Are you sure you want to delete the song?")) return
-            this.setPlaylist = playList.filter(song => song.id !== id )
+            this.setPlaylist = playlist.filter(song => song.id !== id )
         },
+
         resetFields(){
             urlInput.value = ""
             titleInput.value = ""
-            validation().render("")
+            eventbus.emit("resetFields")
         }
   
     }

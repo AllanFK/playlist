@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Curry</title>
+    </head>
+    <body>
+        
+        <div id="buttons">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+        </div>
+        
+        <script>
+
+            var buttons = [
+                { name: "one", message: "message one" },
+                { name: "two", message: "message two" },
+                { name: "tree", message: "message tree" }
+            ]
+
+            var onClick = (index) => (event) => {
+                console.log(index, buttons[index].message, event)
+            }
+
+            
+
+            var btnDiv = document.getElementById("buttons")
+            btnDiv.onclick = onClick(1)
+
+
+            // buttons.forEach(b => {
+            //     var btn = document.createElement("button")
+            //     btn.onclick = onClick(b.message)
+            //     btn.innerHTML = b.name 
+            //     btnDiv.appendChild(btn)
+            // })
+        </script>
+        
+        
+    
+    </body>
+</html>
