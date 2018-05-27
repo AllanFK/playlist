@@ -35,20 +35,18 @@ const playlist = (id, eventbus) => {
 
         createNode(id, title){
             const wrapperDiv = document.createElement("div")
-            const titleDiv = document.createElement("div")
-            const deleteDiv = document.createElement("div")
-            
             wrapperDiv.className = "playlist-song"
-
             if(id === selectedVideo){
                 wrapperDiv.classList.add("selected")
             }
-            
+
+            const titleDiv = document.createElement("div")
             titleDiv.id = id
             titleDiv.className = "playlist-song-title"
             titleDiv.innerHTML = title
             titleDiv.onclick = e => this.setSelectedVideo = e.target.id
-            
+
+            const deleteDiv = document.createElement("div")
             deleteDiv.id = id
             deleteDiv.className = "playlist-song-delete"
             deleteDiv.innerHTML = " x "
@@ -56,7 +54,6 @@ const playlist = (id, eventbus) => {
 
             wrapperDiv.appendChild(titleDiv)
             wrapperDiv.appendChild(deleteDiv)
-
             return wrapperDiv
         },
 
