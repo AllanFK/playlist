@@ -20,35 +20,44 @@ const playlist = (id, eventbus) => {
         },
 
         render(){
-            playlistDiv.innerHTML = this.getHtmlFromList
+            playlistDiv.innerHTML = ""
+            playlist
+                .map(song => this.createNode(song.id, song.title))
+                .forEach(song => playlistDiv.appendChild(song))
+                
             this.resetFields()
         },
 
         bindEvents(){
-            main.onclick = (e) => {
-                if(e.target.className === "playlist-song-delete"){
-                    this.deleteSong(e.target.id)
-                } else if(e.target.id === "addSong") {
-                    this.validateSong()
-                } else if(e.target.className === "playlist-song-title"){
-                    this.setSelectedVideo = e.target.id
-                }
-            }   
-
+            songBtn.onclick = () => this.validateSong()
             eventbus.on("validated", params => this.addSong(params))
         },
 
-        get getHtmlFromList(){
-            var html = ""
-            playlist.forEach(song => {
-                const id = song.id
-                const extraClass = id === selectedVideo ? "selected" : ""
-                html += `<div class="playlist-song ${extraClass}">
-                            <div id="${id}" class="playlist-song-title">${song.title}</div>
-                            <div id="${id}" class="playlist-song-delete"> x </div>
-                        </div>`            
-            })
-            return html
+        createNode(id, title){
+            const wrapperDiv = document.createElement("div")
+            const titleDiv = document.createElement("div")
+            const deleteDiv = document.createElement("div")
+            
+            wrapperDiv.className = "playlist-song"
+
+            if(id === selectedVideo){
+                wrapperDiv.classList.add("selected")
+            }
+            
+            titleDiv.id = id
+            titleDiv.className = "playlist-song-title"
+            titleDiv.innerHTML = title
+            titleDiv.onclick = e => this.setSelectedVideo = e.target.id
+            
+            deleteDiv.id = id
+            deleteDiv.className = "playlist-song-delete"
+            deleteDiv.innerHTML = " x "
+            deleteDiv.onclick = (e) => this.deleteSong(e.target.id)
+
+            wrapperDiv.appendChild(titleDiv)
+            wrapperDiv.appendChild(deleteDiv)
+
+            return wrapperDiv
         },
 
         set setSelectedVideo(id){

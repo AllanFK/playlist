@@ -10,7 +10,6 @@ const validation = (eventbus) => {
         },
 
         render(){
-            
             errorMsgDiv.innerHTML = errorMessage
         },
 
@@ -20,7 +19,6 @@ const validation = (eventbus) => {
         },
 
         set setErrorMessage(msg){
-            console.log("setErrorMessage", errorMessage)
             errorMessage = msg
             this.render()
         },
